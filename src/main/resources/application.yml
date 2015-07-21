@@ -1,0 +1,14 @@
+datasource:
+  mysql:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/uaa
+    username: root
+    password: changeme
+    validation-query: SELECT 1
+
+  postgresql:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql:uaa
+    username: root
+    password: changeme
+    validation-query: SELECT 1

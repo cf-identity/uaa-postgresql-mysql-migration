@@ -1,0 +1,18 @@
+language: java
+jdk:
+- oraclejdk8
+services:
+- mysql
+- postgresql
+before_install:
+- psql -c 'drop database if exists uaa;' -U postgres
+- psql -c 'create database uaa;' -U postgres
+- psql -c "drop user if exists root;" --dbname=uaa -U postgres
+- psql -c "create user root with superuser password 'changeme';" --dbname=uaa -U postgres
+- psql -c "show max_connections;" --dbname=uaa -U postgres
+- mysql -e 'drop database if exists uaa;'
+- mysql -e 'create database uaa;'
+- mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('changeme');"
+- mysql -e "SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('changeme');"
+script:
+- ./gradlew clean assemble test
